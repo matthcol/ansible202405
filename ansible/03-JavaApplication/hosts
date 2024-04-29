@@ -1,2 +1,6 @@
 [api]
 host1.localdomain
+host3.localdomain
+
+[test]
+host2.localdomain

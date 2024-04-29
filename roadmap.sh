@@ -64,4 +64,46 @@ ansible-playbook -i hosts -u srvadmin -k -K -e "user_deploy=jenvoie" playbook-de
 
 # directory ansible/03-JavaApplication
 ansible-playbook -u jenvoie -i hosts playbook-javainstall.yml
+# check on host1
+ssh jenvoie@host1 java --version
+# install another version: 
+ansible-playbook -u jenvoie -i hosts -e "jre_version=1.8.0" playbook-javainstall.yml
+
+Note: host pattern
+https://docs.ansible.com/ansible/latest/inventory_guide/intro_patterns.html
+
+ansible-playbook -i hosts --list-tasks playbook-javainstall.yml
+ansible-playbook -i hosts --list-hosts playbook-javainstall.yml
+ansible-playbook -i hosts -u jenvoie --start-at-task "Install JRE Debian" playbook-javainstall.yml
+ansible-playbook -i hosts -u jenvoie --start-at-task "Install JRE Debian" --step playbook-javainstall.yml
+
+# tags
+ansible-playbook -i hosts --list-tags playbook-javainstall.yml
+ansible-playbook -i hosts --list-tasks playbook-javainstall.yml
+ansible-playbook -i hosts -u jenvoie -t API playbook-javainstall.yml
+ansible-playbook -i hosts -u jenvoie -t TEST playbook-javainstall.yml
+ansible-playbook -i hosts -u jenvoie -t PACKAGE playbook-javainstall.yml (error: no gathering facts => ansible_os_family undefined)
+ansible-playbook -i hosts -u jenvoie --skip-tags TEST playbook-javainstall.yml
+ansible-playbook -i hosts -u jenvoie -t API --skip-tags PACKAGE playbook-javainstall.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
