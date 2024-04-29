@@ -47,4 +47,21 @@ sudo vi /etc/ansible/ansible.cfg
 interpreter_python=/usr/bin/python3
 # check
 ansible -i hosts  -u toto -v -m ping all
+# inside inventory (host-python)
+ansible -i hosts-python  -u toto -v -m ping all
+
+# choose deploy user
+ansible-playbook -i hosts -u toto -e "user_deploy=jenvoie" playbook-deployuser.yml
+
+# remove sudo privilege for toto user
+ansible-playbook -i hosts -u jenvoie  playbook-deactivateuser.yml
+# remove sudo privilege for jenvoie user
+ansible-playbook -i hosts -u jenvoie  -e "user_deploy=jenvoie" playbook-deactivateuser.yml
+
+# reactivate sudo privilege
+ansible-playbook -i hosts -u srvadmin -k -K -e "user_deploy=jenvoie" playbook-deployuser.yml
+
+
+# directory ansible/03-JavaApplication
+ansible-playbook -u jenvoie -i hosts playbook-javainstall.yml
 

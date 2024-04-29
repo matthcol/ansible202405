@@ -118,7 +118,6 @@ interpreter_python=/usr/bin/python3
  ```
 
 NB: links
-- https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html
 - https://docs.ansible.com/ansible/latest/reference_appendices/interpreter_discovery.html
 
 ## Execution partielle (tags, start at task)

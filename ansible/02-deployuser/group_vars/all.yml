@@ -1,2 +1,2 @@
-user_deploy: deploy
+user_deploy: toto
 deployment_public_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa_deploy.pub"

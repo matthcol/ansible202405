@@ -1,0 +1,8 @@
+---
+- name: Install Java Api
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install JRE
+      ansible.builtin.yum:
+        name: java-17-openjdk
