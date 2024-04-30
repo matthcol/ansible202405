@@ -86,6 +86,8 @@ ansible-playbook -i hosts -u jenvoie -t PACKAGE playbook-javainstall.yml (error:
 ansible-playbook -i hosts -u jenvoie --skip-tags TEST playbook-javainstall.yml
 ansible-playbook -i hosts -u jenvoie -t API --skip-tags PACKAGE playbook-javainstall.yml
 
+# test API on host1 (port 8080 mapped on docker host)
+http://localhost:8080/swagger-ui/index.html
 
 
 
