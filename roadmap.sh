@@ -135,15 +135,18 @@ https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_error_handling.
 - https://www.digitalocean.com/community/tutorials/how-to-use-vault-to-protect-sensitive-ansible-data
 
 ansible-vault create somevault.yml
-ansible-vault encrypt roles/db/vars/main.yml
-ansible-vault view roles/db/vars/main.yml
-ansible-vault edit roles/db/vars/main.yml
-ansible-vault decrypt roles/db/vars/main.yml
+ansible-vault encrypt group_vars/all.yml
+ansible-vault view group_vars/all.yml
+ansible-vault edit group_vars/all.yml
+ansible-vault decrypt group_vars/all.yml
 
-ansible-playbook --ask-vault-password -i hosts -u deploy -t DB --skip-tags PACKAGE playbook-install.yml
+ansible-playbook --ask-vault-password -i hosts -u jenvoie -t DB playbook-javainstall.yml 
 
 # NB:you can also put the password in a temporrary file and use a ENV VAR
+vi .vault_pass # with vault password
 export ANSIBLE_VAULT_PASSWORD_FILE=./.vault_pass
+ansible-playbook -i hosts -u jenvoie -t DB playbook-javainstall.yml
+rm .vault_pass
 
 
 

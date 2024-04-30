@@ -1,2 +1,11 @@
 ---
 # tasks file for roles/test
+- name: Install softwares
+  tags: PACKAGE
+  ansible.builtin.yum:
+    #name: wget,jq
+    name: "{{ item }}" 
+  loop:
+    - wget
+    - jq
+    - mariadb

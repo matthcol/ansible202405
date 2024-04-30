@@ -6,6 +6,13 @@
   roles:
     - api
 
+- name: Install Database
+  hosts: db
+  tags: DB
+  become: yes
+  roles:
+    - db
+
 - name: Install Test Environment
   hosts: test
   tags: TEST

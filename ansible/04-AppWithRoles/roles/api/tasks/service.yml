@@ -1,0 +1,14 @@
+---
+- name: Debug api basename
+  ansible.builtin.debug:
+    var: api_jar | basename
+- name: Service Unit
+  vars:
+    api_jar_basename: "{{ api_jar | basename }}"
+  ansible.builtin.template:
+    src: api.service.j2
+    dest: /usr/lib/systemd/system/api.service
+- name: Servive enabled
+  ansible.builtin.systemd_service:
+    name: api
+    enabled: true

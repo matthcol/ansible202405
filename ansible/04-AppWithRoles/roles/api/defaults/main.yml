@@ -3,3 +3,4 @@
 jre_version: 17
 api_user: exploit
 api_group: "{{ api_user }}"
+db_host: "{{ groups.db[0] }}"

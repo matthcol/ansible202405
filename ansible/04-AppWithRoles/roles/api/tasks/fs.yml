@@ -22,4 +22,13 @@
     group: "{{ api_group }}"
   notify: 
     - restart api service
+- name: API Config
+  ansible.builtin.template:
+    src: application.properties.j2
+    dest: "{{ api_directory }}/application.properties"
+    mode: 0400
+    owner: "{{ api_user }}"
+    group: "{{ api_group }}"
+  notify: 
+    - restart api service
 
