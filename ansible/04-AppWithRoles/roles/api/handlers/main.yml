@@ -1,2 +1,5 @@
 ---
 # handlers file for roles/api
+- name: restart api service
+  ansible.builtin.debug:
+    msg:  "TODO: restart api service"

@@ -1,40 +1,8 @@
 ---
 # tasks file for roles/api
-- name: Debug OS Family
-  ansible.builtin.debug:
-    #var: ansible_facts
-    #var: ansible_facts['os_family']
-    #var: ansible_facts.os_family
-    var: ansible_os_family
-- name: Install JRE RedHat
-  tags: PACKAGE
-  ansible.builtin.yum:
-    name: java-{{ jre_version }}-openjdk
-  when: ansible_os_family == 'RedHat'
-- name: Install JRE Debian
-  tags: PACKAGE
-  ansible.builtin.apt:
-    name: openjdk-{{ jre_version }}-jre
-  when: ansible_os_family == 'Debian'
-- name: API Group
-  ansible.builtin.group:
-    name: "{{ api_group }}"
-- name: API User
-  ansible.builtin.user:
-    name: "{{ api_user }}"
-    shell: /usr/sbin/nologin
-- name: API Directory
-  ansible.builtin.file:
-    path: "{{ api_directory }}"
-    state: directory
-    mode: 0755
-    owner: "{{ api_user }}"
-    group: "{{ api_group }}"
-- name: API Artifact
-  ansible.builtin.copy:
-    src: "{{ api_jar }}"
-    dest: "{{ api_directory }}"
-    mode: 0444
-    owner: "{{ api_user }}"
-    group: "{{ api_group }}"
+# TODO: split jre.yml => jre-debian.yml and jre-redhat.yml and use dynamic include_tasks
+- import_tasks: jre.yml
 
+- import_tasks: fs.yml
+
+- import_tasks: service.yml

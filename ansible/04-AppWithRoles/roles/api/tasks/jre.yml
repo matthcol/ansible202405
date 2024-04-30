@@ -1,0 +1,17 @@
+---
+- name: Debug OS Family
+  ansible.builtin.debug:
+    #var: ansible_facts
+    #var: ansible_facts['os_family']
+    #var: ansible_facts.os_family
+    var: ansible_os_family
+- name: Install JRE RedHat
+  tags: PACKAGE
+  ansible.builtin.yum:
+    name: java-{{ jre_version }}-openjdk
+  when: ansible_os_family == 'RedHat'
+- name: Install JRE Debian
+  tags: PACKAGE
+  ansible.builtin.apt:
+    name: openjdk-{{ jre_version }}-jre
+  when: ansible_os_family == 'Debian'

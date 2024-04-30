@@ -1,0 +1,25 @@
+---
+- name: API Group
+  ansible.builtin.group:
+    name: "{{ api_group }}"
+- name: API User
+  ansible.builtin.user:
+    name: "{{ api_user }}"
+    shell: /usr/sbin/nologin
+- name: API Directory
+  ansible.builtin.file:
+    path: "{{ api_directory }}"
+    state: directory
+    mode: 0755
+    owner: "{{ api_user }}"
+    group: "{{ api_group }}"
+- name: API Artifact
+  ansible.builtin.copy:
+    src: "{{ api_jar }}"
+    dest: "{{ api_directory }}"
+    mode: 0440
+    owner: "{{ api_user }}"
+    group: "{{ api_group }}"
+  notify: 
+    - restart api service
+
