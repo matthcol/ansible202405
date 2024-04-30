@@ -1,0 +1,15 @@
+---
+- name: Install Java Api
+  hosts: api
+  tags: API
+  become: yes
+  roles:
+    - api
+
+- name: Install Test Environment
+  hosts: test
+  tags: TEST
+  become: yes
+  roles:
+    - test
+  

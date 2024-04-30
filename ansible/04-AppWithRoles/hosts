@@ -1,0 +1,9 @@
+[api]
+host1.localdomain
+
+[db]
+host3.localdomain
+
+[test]
+host2.localdomain
+

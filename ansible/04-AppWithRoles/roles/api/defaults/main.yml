@@ -1,0 +1,5 @@
+---
+# defaults file for roles/api
+jre_version: 17
+api_user: exploit
+api_group: "{{ api_user }}"

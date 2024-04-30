@@ -1,0 +1,7 @@
+api_version: 1.0
+api_jar: /mnt/artifacts/movieapi-{{ api_version }}.jar
+api_directory: /srv/movieapi
+# custom settings overriding default values of role api
+# jre_version: 21
+# api_user: movieu
+# api_group: movieg
