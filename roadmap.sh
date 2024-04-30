@@ -89,9 +89,61 @@ ansible-playbook -i hosts -u jenvoie -t API --skip-tags PACKAGE playbook-javains
 # test API on host1 (port 8080 mapped on docker host)
 http://localhost:8080/swagger-ui/index.html
 
+# playbook with roles
+ansible-galaxy init roles/api
+ansible-galaxy init roles/db
+ansible-galaxy init roles/test
+
+ansible-playbook -i hosts --list-tasks playbook-javainstall.yml
+ansible-playbook -i hosts --list-tags playbook-javainstall.yml
+ansible-playbook -i hosts --list-hosts playbook-javainstall.yml
+ansible-playbook -i hosts --list-tasks --list-hosts playbook-javainstall.yml
+
+ansible-playbook -i hosts -u jenvoie playbook-javainstall.yml
+
+# Import vs Include
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse.html
+
+# handlers
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_handlers.html
+
+# templates
+# check
+ssh jenvoie@host1 systemctl status api
+ssh jenvoie@host1 cat /usr/lib/systemd/system/api.service
+ssh jenvoie@host1 sudo systemctl start api
+
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_privilege_escalation.html
 
 
+# Database on debian host3
+ansible-playbook -i hosts -u jenvoie -t DB playbook-javainstall.yml
+# check MariaDB (root user)
+mysql (or mariadb)
+show databases;
+select host, user from mysql.user;
 
+# Conditonals
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_conditionals.html
+
+# Errors
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_error_handling.html
+
+# Ansible Vaults
+# VAULT
+- https://docs.ansible.com/ansible/latest/vault_guide/index.html
+- https://www.digitalocean.com/community/tutorials/how-to-use-vault-to-protect-sensitive-ansible-data
+
+ansible-vault create somevault.yml
+ansible-vault encrypt roles/db/vars/main.yml
+ansible-vault view roles/db/vars/main.yml
+ansible-vault edit roles/db/vars/main.yml
+ansible-vault decrypt roles/db/vars/main.yml
+
+ansible-playbook --ask-vault-password -i hosts -u deploy -t DB --skip-tags PACKAGE playbook-install.yml
+
+# NB:you can also put the password in a temporrary file and use a ENV VAR
+export ANSIBLE_VAULT_PASSWORD_FILE=./.vault_pass
 
 
 
