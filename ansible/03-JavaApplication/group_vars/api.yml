@@ -1,4 +1,5 @@
 api_user: exploit
-api_group: exploit
-api_jar: /mnt/artifacts/movieapi-1.0.jar
+api_group: "{{ api_user }}"
+api_version: 1.0
+api_jar: /mnt/artifacts/movieapi-{{ api_version }}.jar
 api_directory: /srv/movieapi

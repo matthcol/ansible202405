@@ -22,6 +22,9 @@
       ansible.builtin.apt:
         name: openjdk-{{ jre_version }}-jre
       when: ansible_os_family == 'Debian'
+    - name: API Group
+      ansible.builtin.group:
+        name: "{{ api_group }}"
     - name: API User
       ansible.builtin.user:
         name: "{{ api_user }}"
